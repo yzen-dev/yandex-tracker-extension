@@ -4,90 +4,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title></title>
+    <link rel="stylesheet" href="../tracker-extension.css">
 </head>
 <body>
-    <style>
-        .mr-tab {
-            font-size: 1rem;
-            border-radius: 4px;
-            padding: 16px;
-            border: 1px solid #dbdbdb;
-            display: flex;
-            margin: 10px;
-            flex-direction: column;
-            font-family: system-ui;
-        }
-
-        .mr-tab .mr-tab-header {
-            display: flex;
-            margin-bottom: 10px;
-            align-items: center;
-            font-size: 14px;
-        }
-
-        .mr-tab .mr-tab-header .mr-action {
-            padding: 3px 5px;
-            margin-right: 8px;
-            color: white;
-            border-radius: 7px;
-        }
-
-        .mr-tab .mr-tab-header .mr-open {
-            background-color: #108548;
-        }
-
-        .mr-tab .mr-tab-header .mr-closed {
-            background-color: #dd2b0e;
-        }
-
-        .mr-tab .mr-tab-header .mr-merged {
-            background-color: #1f75cb;
-        }
-
-        .mr-tab .mr-tab-header .mr-date-created {
-            margin-right: 8px;
-        }
-
-        .mr-tab .mr-tab-header .mr-author {
-            display: flex;
-            align-items: center;
-            margin-right: 8px;
-        }
-
-        .mr-author img {
-            margin-right: 10px
-        }
-
-        .mr-tab .mr-tab-title {
-            margin: 0 0 8px;
-            font-size: 20px;
-            color: #303030;
-            display: flex;
-        }
-
-        .mr-tab .mr-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #666;
-            margin-right: 10px
-        }
-
-        .mr-tab-branch {
-            font-size: 16px;
-            display: flex;
-        }
-
-        .visible-hidden {
-            display: none;
-        }
-
-
-        .mr-tab-body{
-
-        }
-
-    </style>
 
     <div class="mr-tab">
         <div class="mr-tab-header">
@@ -133,6 +52,46 @@
         </div>
         <div class="mr-tab-body">
 
+        </div>
+    </div>
+
+    <div class="commits">
+        <div class="commits__header">
+            <div class="commits__title">
+                <a href="#" class="commits-list-link">Коммиты</a>
+                <span>2</span>
+            </div>
+
+            <div class="commits__action">
+                Свернуть
+            </div>
+        </div>
+        <div class="commits__list">
+            <div class="commit-item">
+                <div class="avatar-cell">
+
+                </div>
+                <div class="commit-detail">
+                    <div class="commit-content">
+                        <a href="#" class="commit-message">
+                            (base-2504) Add: Применение скидки за счет YoCoin на фронте
+                        </a>
+                        <div class="commiter">
+                            <div class="commiter-author">
+                                Mikhalev Evgeniy
+                            </div>
+                            <div class="commiter-date">
+                                Создал 2 дня назад
+                            </div>
+                        </div>
+                    </div>
+                    <div class="commit-actions">
+                        <div class="commit-sha-group">
+                            089c46b7342d50d5888cf24efa8bbe3127f5f74e
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>

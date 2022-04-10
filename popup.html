@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>YoTracker</title>
+
+</head>
+<body>
+
+    <style>
+        body {
+            background: rgba(0, 0, 0, 0.8);
+            margin: 0;
+        }
+        .visible-hidden {
+            display: none;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            border-radius: 8px;
+            border: 1px solid #4ec0e9;
+            background: 0 0;
+            cursor: pointer;
+            color: #4ec0e9;
+        }
+
+        .btn:hover {
+            color: white;
+            background: #4ec0e9;
+        }
+
+        .btn:hover::before {
+            transform: translateX(100%);
+        }
+
+        .form-input-material {
+            position: relative;
+            border-bottom: 1px solid white;
+            width: 100%;
+            margin: 12px 0;
+        }
+
+        .form-input-material input {
+            color: white;
+            padding: 0.5rem 0;
+            background: 0 0;
+            border: none;
+            appearance: none;
+            outline: 0;
+        }
+
+        .form-input-material input:focus ~ label,
+        .form-input-material .form-control-material:not(:placeholder-shown) ~ label {
+            transform: translateY(-120%) scale(.75);
+        }
+
+        .form-input-material .form-control-material:valid ~ label {
+            color: #4ec0e9;
+        }
+
+        .form-input-material label {
+            position: absolute;
+            top: 0.5rem;
+            left: 0;
+            transition: .3s;
+            transform-origin: left;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 50px 40px;
+            min-width: 250px;
+            color: white;
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .login-form h1 {
+            margin: 0 0 24px 0;
+        }
+
+        .login-form .btn {
+            width: 100%;
+            margin: 18px 0 9px 0;
+        }
+
+    </style>
+
+    <form class="login-form visible-hidden" id="loginForm">
+        <h1>Authorization</h1>
+        <div class="form-input-material">
+            <input type="text" name="host" id="host" value="https://git.tag24.ru/api/v4/" placeholder=" "
+                   autocomplete="off" class="form-control-material" required/>
+            <label for="host">Host</label>
+        </div>
+        <div class="form-input-material">
+            <input type="password" name="access-token" id="accessToken" value="9QAnNDgx7RVwnxksonRX" placeholder=" "
+                   autocomplete="off" class="form-control-material" required/>
+            <label for="accessToken">Access Token</label>
+        </div>
+        <button id="loginBtn" class="btn">Login</button>
+    </form>
+
+    <script src="popup.js"></script>
+</body>
+</html>

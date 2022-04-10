@@ -1,0 +1,155 @@
+.mr-tab {
+    font-size: 1rem;
+    border-radius: 4px;
+    padding: 16px;
+    border: 1px solid #dbdbdb;
+    display: flex;
+    margin: 10px;
+    flex-direction: column;
+    font-family: system-ui;
+}
+
+.mr-tab .mr-tab-header {
+    display: flex;
+    margin-bottom: 10px;
+    align-items: center;
+    font-size: 14px;
+}
+
+.mr-tab .mr-tab-header .mr-action {
+    padding: 3px 5px;
+    margin-right: 8px;
+    color: white;
+    border-radius: 7px;
+}
+
+.mr-tab .mr-tab-header .mr-open {
+    background-color: #108548;
+}
+
+.mr-tab .mr-tab-header .mr-closed {
+    background-color: #dd2b0e;
+}
+
+.mr-tab .mr-tab-header .mr-merged {
+    background-color: #1f75cb;
+}
+
+.mr-tab .mr-tab-header .mr-date-created {
+    margin-right: 8px;
+}
+
+.mr-tab .mr-tab-header .mr-author {
+    display: flex;
+    align-items: center;
+    margin-right: 8px;
+}
+
+.mr-author img {
+    margin-right: 10px
+}
+
+.mr-tab .mr-tab-title {
+    margin: 0 0 8px;
+    font-size: 20px;
+    color: #303030;
+    display: flex;
+}
+
+.mr-tab .mr-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    margin-right: 10px
+}
+
+.mr-tab-branch {
+    font-size: 16px;
+    display: flex;
+}
+
+.visible-hidden {
+    display: none;
+}
+
+.commits {
+    padding: 10px 10px 10px 0;
+    margin: 0 20px 10px;
+    border-bottom: solid 1px #ccc;
+    font-size: 14px;
+}
+
+.commits .commits__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.commits-list-link {
+    text-decoration: none;
+}
+
+.commits-list-action {
+    margin-right: 8px;
+    color: #777;
+    cursor: pointer;
+}
+
+.commits__list {
+
+}
+
+.commit-item {
+    display: flex;
+
+}
+
+.commit-item:not(:last-child) {
+    border-bottom: solid 1px #ccc;
+}
+
+.commit-detail {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+}
+
+.commit-content {
+    margin: 20px 10px;
+}
+
+.commit-message {
+    color: #303030;
+    font-weight: 600;
+    text-decoration: none;
+    margin-bottom: 5px;
+}
+
+.commiter {
+    display: flex
+}
+
+.commiter-author {
+    color: #303030;
+    margin-right: 8px;
+}
+
+.commiter-date {
+    color: #868686;
+}
+
+.commit-actions {
+    display: flex;
+    align-items: center;
+}
+
+.commit-sha-group {
+    user-select: text;
+    color: #303030;
+    background-color: #fafafa;
+    border-radius: 4px;
+    border: 1px #bfbfbf solid;
+    font-size: 14px;
+    padding: 6px 10px;
+}
