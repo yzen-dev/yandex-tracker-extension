@@ -1,24 +1,35 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "YoTracker",
   "description": "Дополнительный функционал трекера",
   "version": "1.0",
+  "author": "yzen.dev",
   "icons": {
     "128": "assets/icons/icon-tools.png"
   },
-
+  "permissions": ["activeTab", "tabs", "storage", "scripting"],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; script-src-elem 'self' 'unsafe-inline' https://tracker.yandex.ru/;"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
   "content_scripts": [
     {
       "matches": [
         "*://tracker.yandex.ru/*"
       ],
       "js": [
-        "background.js"
-      ]
+        "tracker-extension.js"
+      ],
+      "css":["tracker-extension.css"],
+      "run_at": "document_idle",
+      "all_frames": false
     }
   ],
-  "browser_action": {
+  "action": {
     "default_title": "YoTracker",
-    "default_icon": "assets/icons/icon-tools.png"
+    "default_icon": "assets/icons/icon-tools.png",
+    "default_popup": "popup.html"
   }
 }

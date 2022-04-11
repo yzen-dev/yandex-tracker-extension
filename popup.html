@@ -1,0 +1,304 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>YoTracker</title>
+
+</head>
+<body>
+
+    <style>
+        body {
+            margin: 0;
+        }
+
+        h1 {
+            margin: 0 0 24px 0;
+        }
+        input[type=checkbox] {
+            --active-inner: #fff;
+            --background: transparent;
+            --disabled: #74b666;
+            --disabled-inner: #74b666;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            width: 21px;
+            height: 21px;
+            outline: none;
+            display: inline-block;
+            vertical-align: top;
+            position: relative;
+            border-radius: 7px;
+            margin: 0;
+            cursor: pointer;
+            border: 1px solid;
+            border-color: #74b666;
+            background: var(--b, var(--background));
+            transition: background 0.3s, border-color 0.3s, box-shadow 0.2s;
+        }
+
+        input[type=checkbox]:after {
+            opacity: var(--o, 0);
+            width: 5px;
+            height: 9px;
+            border: 2px solid var(--active-inner);
+            border-top: 0;
+            border-left: 0;
+            left: 6px;
+            top: 3px;
+            transform: rotate(var(--r, 20deg));
+            content: "";
+            display: block;
+            position: absolute;
+            transition: transform var(--d-t, 0.3s) var(--d-t-e, ease), opacity var(--d-o, 0.2s);
+        }
+
+        input[type=checkbox]:checked {
+            --b: #74b666;
+            --bc: #74b666;
+            --d-o: .3s;
+            --d-t: .6s;
+            --d-t-e: cubic-bezier(.2, .85, .32, 1.2);
+            --o: 1;
+            --r: 43deg;
+        }
+
+        input[type=checkbox]:disabled,
+        input[type=radio]:disabled {
+            --b: var(--disabled);
+            cursor: not-allowed;
+            opacity: 0.9;
+        }
+
+        input[type=checkbox]:focus,
+        input[type=radio]:focus {
+            box-shadow: 0 0 4px 2px #74b66673;
+        }
+
+        input[type=checkbox] + label {
+            font-size: 14px;
+            line-height: 21px;
+            display: inline-block;
+            vertical-align: top;
+            cursor: pointer;
+            margin-left: 8px;
+        }
+
+
+        .visible-hidden {
+            display: none !important;
+        }
+
+        .main-page {
+            display: flex;
+            flex-direction: column;
+            color: white;
+        }
+
+        .popup {
+            background: #2b2d33;
+            color: white;
+            min-width: 300px;
+        }
+
+        .popup__wrapper {
+            padding: 20px;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            width: 250px;
+        }
+
+        .login-form .btn {
+            width: 100%;
+            margin: 18px 0 9px 0;
+        }
+
+        .btn {
+            border-radius: 3px;
+            color: #d7d7d7;
+            padding: 10px 15px;
+            height: 100%;
+            width: 200px;
+            cursor: pointer;
+        }
+
+        .btn.btn_success {
+            border: 1px solid #74b666;
+            background-color: rgba(116, 182, 102, 0.3);
+            color: #d7d7d7;
+        }
+
+        .btn.btn_success:hover {
+            color: white;
+            background-color: rgba(116, 182, 102, 1);
+        }
+
+        .form-input-material {
+            position: relative;
+            border-bottom: 1px solid white;
+            width: 100%;
+            margin: 12px 0;
+        }
+
+        .form-input-material input {
+            color: white;
+            padding: 0.5rem 0;
+            background: 0 0;
+            border: none;
+            appearance: none;
+            outline: 0;
+            width: 100%;
+        }
+
+        .form-input-material input:focus ~ label,
+        .form-input-material .form-control-material:not(:placeholder-shown) ~ label {
+            transform: translateY(-120%) scale(.75);
+        }
+
+        .form-input-material .form-control-material:valid ~ label {
+            color: #4ec0e9;
+        }
+
+        .form-input-material label {
+            position: absolute;
+            top: 0.5rem;
+            left: 0;
+            transition: .3s;
+            transform-origin: left;
+        }
+
+        .integration-connect {
+            margin-top: 10px;
+        }
+
+        .integration-connect .integration-connect__item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 16px;
+        }
+
+        .integration-connect .integration-connect__title {
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-text-trash {
+            padding: 0;
+            border: none;
+            background-color: inherit;
+            color: #d93c3c;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        .btn-text-success {
+            padding: 0;
+            border: none;
+            background-color: inherit;
+            color: #74b666;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .integration-connect .integration-connect__title svg {
+            color: rgb(116, 182, 102);
+            margin-left: 10px;
+        }
+
+        .form-row {
+            margin-bottom: 7px;
+        }
+
+        hr {
+            margin: 8px 0;
+            display: block;
+            height: 1px;
+            border: 0;
+            border-top: 0.5px solid #787c86;
+            padding: 0;
+        }
+
+    </style>
+    <div class="popup">
+        <div class="popup__wrapper">
+            <div class="main-page" id="mainPage">
+                <h1>Настройки</h1>
+                <div class="form-row">
+                    <div>
+                        <input type="checkbox" id="sumSP" class="form-check-input" checked disabled>
+                        <label for="sumSP" class="form-check-label">
+                            Суммирование SP
+                        </label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div>
+                        <input type="checkbox" id="checkList" class="form-check-input" checked disabled>
+                        <label for="checkList" class="form-check-label">
+                            Сворачивать чек-лист
+                        </label>
+                    </div>
+                </div>
+
+                <hr/>
+
+                <div class="form-row integration-connect">
+                    <div class="integration-connect__item visible-hidden" id="integrationConnectedBlock">
+                        <div class="integration-connect__title">
+                            GitLab подключен
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                        </div>
+                        <button class="btn-text-trash" id="integrationTrash">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round">
+                                <polyline points="3 6 5 6 21 6"></polyline>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="integration-connect__item visible-hidden" id="integrationDisconnectBlock">
+                        <div class="integration-connect__title">
+                            GitLab не подключен
+                        </div>
+                        <button class="btn-text-success" id="integrationConnect">
+                            Подключить
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <form class="login-form visible-hidden" id="gitlabLoginForm">
+                <h1>GitLab Auth</h1>
+                <div class="form-input-material">
+                    <input type="text" name="host" id="host" value="https://git.tag24.ru/api/v4/" placeholder=" "
+                           autocomplete="off" class="form-control-material" required/>
+                    <label for="host">Host</label>
+                </div>
+                <div class="form-input-material">
+                    <input type="password" name="access-token" id="accessToken" value="9QAnNDgx7RVwnxksonRX"
+                           placeholder=" "
+                           autocomplete="off" class="form-control-material" required/>
+                    <label for="accessToken">Access Token</label>
+                </div>
+                <button id="loginBtn" class="btn btn_success">Login</button>
+            </form>
+
+            <script src="popup.js"></script>
+        </div>
+    </div>
+</body>
+</html>
