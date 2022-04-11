@@ -3,3 +3,5 @@ https://chrome.google.com/webstore/detail/yotracker/cpjahenncedljddpjhhlfoafoead
 Расширение функционала для Яндекс.Трекер:
 
 - Скрытие выполненных задач в чек-листе
+- Суммирование story points
+- интеграция с gitlab
