@@ -88,7 +88,7 @@ class GitLabIntegrationService {
 
             await this.searchCommitsByMergeRequestId(MR.iid)
                 .then(result => {
-                    ticketCard.innerHTML += this.getCommitsHtmlComponent(result);
+                    ticketCard.innerHTML += this.getCommitsHtmlComponent(MR, result);
                 })
                 .catch(error => {
                     console.warn(error);
@@ -116,10 +116,28 @@ class GitLabIntegrationService {
                         console.warn(error);
                     });
             }
-        })
+
+            let commitList = document.querySelectorAll('[data-collapse]');
+            commitList.forEach(node => {
+                let id = node.getAttribute('data-collapse')
+                node.addEventListener("click", async () => {
+                    let element = document.getElementById(id);
+                    if(element){
+                        if (element.classList.contains('visible-hidden')) {
+                            element.classList.remove('visible-hidden')
+                            node.innerHTML = 'Свернуть'
+                        } else {
+                            element.classList.add('visible-hidden')
+                            node.innerHTML = 'Развернуть'
+                        }
+                    }
+
+                });
+            });
+        });
     }
 
-    static getCommitsHtmlComponent(commits) {
+    static getCommitsHtmlComponent(MR, commits) {
         let result = '<div class="commits">\n' +
             '        <div class="commits__header">\n' +
             '            <div class="commits__title">\n' +
@@ -127,11 +145,11 @@ class GitLabIntegrationService {
             '                <span>' + commits.length + '</span>\n' +
             '            </div>\n' +
             '\n' +
-            '            <div class="commits__action">\n' +
-            '                Свернуть\n' +
+            '            <div class="commits__action" data-collapse="commentList' + MR.iid + '">\n' +
+            '                Развернуть\n' +
             '            </div>\n' +
             '        </div>' +
-            '<div class="commits__list">';
+            '<div class="commits__list visible-hidden" id="commentList' + MR.iid + '">';
         commits.forEach(commit => {
             result += this.getCommitItemHtmlComponent(commit);
         })

@@ -85,6 +85,9 @@
     align-items: center;
     justify-content: space-between;
 }
+.commits__action{
+    cursor: pointer;
+}
 
 .commits-list-link {
     text-decoration: none;

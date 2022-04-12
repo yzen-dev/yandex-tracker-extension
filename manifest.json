@@ -2,7 +2,8 @@
   "manifest_version": 3,
   "name": "YoTracker",
   "description": "Дополнительный функционал трекера",
-  "version": "1.2",
+  "version": "1.2.1",
+  "author": "yzen.dev",
   "icons": {
     "128": "assets/icons/icon-tools.png"
   },
