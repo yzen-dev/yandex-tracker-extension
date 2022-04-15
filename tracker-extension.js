@@ -83,58 +83,36 @@ class GitLabIntegrationService {
         const ticketCard = document.getElementsByClassName('b-ticket__main')[0];
         if (!ticketCard) return
 
+        const MergeRequestBlock = document.createElement("div");
+        ticketCard.appendChild(MergeRequestBlock)
+
         mergeRequestData.forEach(async MR => {
-            ticketCard.innerHTML += this.getMergeRequestHtmlComponent(MR)
+            MergeRequestBlock.innerHTML += this.getMergeRequestHtmlComponent(MR)
 
             await this.searchCommitsByMergeRequestId(MR.iid)
                 .then(result => {
-                    ticketCard.innerHTML += this.getCommitsHtmlComponent(MR, result);
-                })
-                .catch(error => {
-                    console.warn(error);
-                });
+                    document.getElementById('mergeRequest'+MR.iid).innerHTML += this.getCommitsHtmlComponent(MR, result);
 
-            let pipeline = null;
-            await this.getPipelinesByMergeRequestId(MR.iid)
-                .then(result => {
-                    console.log('getPipelinesByMergeRequestId');
-                    console.log(result);
-                    pipeline = result[0];
-                })
-                .catch(error => {
-                    console.warn('getPipelinesByMergeRequestId');
-                    console.warn(error);
-                });
-
-            if (pipeline) {
-                await this.getPipelinesTestReport(pipeline.id)
-                    .then(result => {
-                        console.log('getPipelinesTestReport');
-                        console.log(result);
-                    })
-                    .catch(error => {
-                        console.warn(error);
-                    });
-            }
-
-            let commitList = document.querySelectorAll('[data-collapse]');
-            commitList.forEach(node => {
-                let id = node.getAttribute('data-collapse')
-                node.addEventListener("click", async () => {
-                    let element = document.getElementById(id);
-                    if(element){
-                        if (element.classList.contains('visible-hidden')) {
-                            element.classList.remove('visible-hidden')
-                            node.innerHTML = 'Свернуть'
-                        } else {
-                            element.classList.add('visible-hidden')
-                            node.innerHTML = 'Развернуть'
+                    let node= document.getElementById('collapseCommentList'+MR.iid)
+                    node.addEventListener("click", async () => {
+                        let element = document.getElementById(node.getAttribute('data-collapse'));
+                        if (element) {
+                            if (element.classList.contains('visible-hidden')) {
+                                element.classList.remove('visible-hidden')
+                                node.innerHTML = 'Свернуть'
+                            } else {
+                                element.classList.add('visible-hidden')
+                                node.innerHTML = 'Развернуть'
+                            }
                         }
-                    }
 
+                    });
+                })
+                .catch(error => {
+                    console.warn(error);
                 });
-            });
         });
+
     }
 
     static getCommitsHtmlComponent(MR, commits) {
@@ -145,7 +123,7 @@ class GitLabIntegrationService {
             '                <span>' + commits.length + '</span>\n' +
             '            </div>\n' +
             '\n' +
-            '            <div class="commits__action" data-collapse="commentList' + MR.iid + '">\n' +
+            '            <div class="commits__action" id="collapseCommentList' + MR.iid + '" data-collapse="commentList' + MR.iid + '">\n' +
             '                Развернуть\n' +
             '            </div>\n' +
             '        </div>' +
@@ -186,7 +164,8 @@ class GitLabIntegrationService {
     static getMergeRequestHtmlComponent(mergeRequestData) {
         let statusText = mergeRequestData.state === 'merged' ? 'Слито' : mergeRequestData.state === 'closed' ? 'Закрыт' : mergeRequestData.state === 'opened' ? 'Открыт' : '-'
         let statusClass = mergeRequestData.state === 'merged' ? 'mr-merged' : mergeRequestData.state === 'closed' ? 'mr-closed' : mergeRequestData.state === 'opened' ? 'mr-open' : '-'
-        return '<div class="mr-tab">\n' +
+        return '<div class="mr-block" id="mergeRequest'+mergeRequestData.iid+'">\n' +
+            '<div class="mr-tab">\n' +
             '        <div class="mr-tab-header">\n' +
             '            <div class="mr-action ' + statusClass + '">\n' +
             '               ' + statusText + '' +
@@ -222,7 +201,8 @@ class GitLabIntegrationService {
             '        <div class="mr-tab-body">\n' +
             '\n' +
             '        </div>\n' +
-            '    </div>'
+            '    </div>'+
+            '</div>'
 
     }
 

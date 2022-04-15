@@ -1,12 +1,16 @@
+.mr-block {
+    padding: 16px;
+    margin: 10px;
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+}
 .mr-tab {
     font-size: 1rem;
-    border-radius: 4px;
-    padding: 16px;
-    border: 1px solid #dbdbdb;
     display: flex;
-    margin: 10px;
     flex-direction: column;
     font-family: system-ui;
+    padding-bottom: 10px;
+    border-bottom: solid 1px #ccc;
 }
 
 .mr-tab .mr-tab-header {
@@ -75,8 +79,6 @@
 
 .commits {
     padding: 10px 10px 10px 0;
-    margin: 0 20px 10px;
-    border-bottom: solid 1px #ccc;
     font-size: 14px;
 }
 
